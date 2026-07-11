@@ -12,25 +12,25 @@ export default function DailyCosts() {
   return (
     <>
       <h1 className="page-title">Daily Cost Breakdown</h1>
-      <p className="page-sub">Per-day provider split with CPC and connected call metrics</p>
+      <p className="page-sub">Per-day provider split with request volume and cost-per-request metrics</p>
       <div className="panel">
         <table>
           <thead>
             <tr>
-              <th>Date</th><th>OpenAI</th><th>Anthropic</th><th>ElevenLabs</th>
-              <th>Deepgram</th><th>Telephony</th><th>Calls</th><th>Connected</th>
-              <th>Total INR</th><th>CPC INR</th>
+              <th>Date</th><th>AWS</th><th>GCP</th><th>Azure</th>
+              <th>Vercel</th><th>Datadog</th><th>Requests</th><th>Billable</th>
+              <th>Total USD</th><th>$/Request</th>
             </tr>
           </thead>
           <tbody>
             {rows.map((r) => (
               <tr key={r.date}>
                 <td>{r.date}</td>
-                <td>${r.openai}</td><td>${r.anthropic}</td><td>${r.elevenlabs}</td>
-                <td>${r.deepgram}</td><td>${r.telephony}</td>
-                <td>{r.calls}</td><td>{r.connected_calls}</td>
-                <td>₹{r.total_inr.toLocaleString()}</td>
-                <td>₹{r.cost_per_call_inr}</td>
+                <td>${r.aws}</td><td>${r.gcp}</td><td>${r.azure}</td>
+                <td>${r.vercel}</td><td>${r.datadog}</td>
+                <td>{r.requests.toLocaleString()}</td><td>{r.billable_requests.toLocaleString()}</td>
+                <td>${r.total_usd.toLocaleString()}</td>
+                <td>${r.cost_per_request_usd}</td>
               </tr>
             ))}
           </tbody>

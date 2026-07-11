@@ -12,7 +12,7 @@ export default function SyncLogs() {
 
   const trigger = async () => {
     setSyncing(true);
-    await api.triggerSync("Manual — All Sources");
+    await api.triggerSync("Manual — All Integrations");
     await load();
     setSyncing(false);
   };
@@ -20,14 +20,14 @@ export default function SyncLogs() {
   return (
     <>
       <h1 className="page-title">Data Sync Pipeline</h1>
-      <p className="page-sub">Scheduled and manual ingestion jobs from billing sources</p>
+      <p className="page-sub">Live ingestion from Frankfurter FX, provider status pages, and optional Stripe billing</p>
       <button className="btn" onClick={trigger} disabled={syncing} style={{ marginBottom: "1rem" }}>
         {syncing ? "Syncing…" : "Trigger Manual Sync"}
       </button>
       <div className="panel">
         <table>
           <thead>
-            <tr><th>Time</th><th>Source</th><th>Status</th><th>Records</th><th>Message</th></tr>
+            <tr><th>Time</th><th>Source</th><th>Status</th><th>Records</th><th>API</th><th>Message</th></tr>
           </thead>
           <tbody>
             {logs.map((l) => (
@@ -36,6 +36,7 @@ export default function SyncLogs() {
                 <td>{l.source}</td>
                 <td><span className="badge">{l.status}</span></td>
                 <td>{l.records_synced}</td>
+                <td><small>{l.api_endpoint ?? "—"}</small></td>
                 <td>{l.message}</td>
               </tr>
             ))}

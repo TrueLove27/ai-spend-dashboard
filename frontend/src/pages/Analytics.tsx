@@ -5,7 +5,7 @@ import type { PlatformBreakdown } from "../types";
 
 export default function Analytics() {
   const [platforms, setPlatforms] = useState<PlatformBreakdown[]>([]);
-  const [weekly, setWeekly] = useState<{ week: string; spend_inr: number; calls: number }[]>([]);
+  const [weekly, setWeekly] = useState<{ week: string; spend_usd: number; requests: number }[]>([]);
 
   useEffect(() => {
     Promise.all([api.getPlatformBreakdown(), api.getWeeklyRollup()])
@@ -15,10 +15,10 @@ export default function Analytics() {
   return (
     <>
       <h1 className="page-title">Advanced Analytics</h1>
-      <p className="page-sub">Platform share analysis and weekly spend rollups</p>
+      <p className="page-sub">Provider share analysis and weekly spend rollups</p>
       <div className="grid-2">
         <div className="panel">
-          <h2>Platform Share (USD)</h2>
+          <h2>Provider Share (USD)</h2>
           <ResponsiveContainer width="100%" height={260}>
             <BarChart data={platforms} layout="vertical">
               <XAxis type="number" stroke="#8fa3bf" fontSize={11} />
@@ -31,10 +31,10 @@ export default function Analytics() {
         <div className="panel">
           <h2>Weekly Rollup</h2>
           <table>
-            <thead><tr><th>Week</th><th>Spend INR</th><th>Calls</th></tr></thead>
+            <thead><tr><th>Week</th><th>Spend USD</th><th>Requests</th></tr></thead>
             <tbody>
               {weekly.map((w) => (
-                <tr key={w.week}><td>{w.week}</td><td>₹{Math.round(w.spend_inr).toLocaleString()}</td><td>{w.calls}</td></tr>
+                <tr key={w.week}><td>{w.week}</td><td>${Math.round(w.spend_usd).toLocaleString()}</td><td>{w.requests.toLocaleString()}</td></tr>
               ))}
             </tbody>
           </table>

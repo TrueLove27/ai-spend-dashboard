@@ -4,17 +4,18 @@ import { ReactNode } from "react";
 const links = [
   { to: "/", label: "Overview" },
   { to: "/daily", label: "Daily Costs" },
-  { to: "/agents", label: "Agents" },
+  { to: "/workspaces", label: "Workspaces" },
   { to: "/analytics", label: "Analytics" },
   { to: "/sync", label: "Sync Logs" },
+  { to: "/integrations", label: "Integrations" },
 ];
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="layout">
       <aside className="sidebar">
-        <h1>AI Spend</h1>
-        <p>Voice &amp; LLM Cost Control</p>
+        <h1>Cloud Spend</h1>
+        <p>SaaS Cost Control Tower</p>
         <nav className="nav">
           {links.map((l) => (
             <NavLink key={l.to} to={l.to} end={l.to === "/"}>

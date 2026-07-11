@@ -119,7 +119,7 @@ ai-spend-dashboard/
 │   │   ├── components/Layout.tsx   # Sidebar navigation shell
 │   │   └── pages/                  # Dashboard, DailyCosts, Agents, Analytics, SyncLogs
 │   ├── package.json
-│   ├── vite.config.ts              # Dev proxy → backend :8000
+│   ├── vite.config.ts              # Dev proxy → backend :8001
 │   └── Dockerfile
 ├── docker-compose.yml
 └── README.md
@@ -146,10 +146,10 @@ ai-spend-dashboard/
 ```bash
 cd backend
 pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
+uvicorn app.main:app --reload --port 8001
 ```
 
-API docs: http://localhost:8000/docs
+API docs: http://localhost:8001/docs
 
 ### Frontend
 
@@ -159,7 +159,7 @@ npm install
 npm run dev
 ```
 
-Dashboard: http://localhost:5173
+Dashboard: http://localhost:5174
 
 ---
 
@@ -171,8 +171,8 @@ docker compose up --build
 
 | Service | URL |
 |---------|-----|
-| Frontend | http://localhost:5173 |
-| Backend API | http://localhost:8000/docs |
+| Frontend | http://localhost:5174 |
+| Backend API | http://localhost:8001/docs |
 
 ---
 
