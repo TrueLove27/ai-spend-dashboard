@@ -27,15 +27,15 @@ Internal-style **cost control tower** for AI voice and LLM infrastructure. Aggre
 docker compose up --build
 ```
 
-- App: http://localhost:5173  
-- API docs: http://localhost:8000/docs  
+- App: http://localhost:5174  
+- API docs: http://localhost:8001/docs  
 
 **Local development**
 
 ```bash
 # Backend
 cd backend && pip install -r requirements.txt
-uvicorn app.main:app --reload --port 8000
+uvicorn app.main:app --reload --port 8001
 
 # Frontend (separate terminal)
 cd frontend && npm install && npm run dev
