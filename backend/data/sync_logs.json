@@ -1,0 +1,6 @@
+[
+  {"id": "sync-001", "source": "BigQuery Billing Export", "status": "success", "records_synced": 11, "message": "Daily GCP costs ingested", "ran_at": "2026-07-11T21:00:00Z"},
+  {"id": "sync-002", "source": "ElevenLabs API", "status": "success", "records_synced": 11, "message": "ASR/TTS usage pulled", "ran_at": "2026-07-11T21:05:00Z"},
+  {"id": "sync-003", "source": "Trino Call Store", "status": "success", "records_synced": 840, "message": "Connected call counts updated", "ran_at": "2026-07-11T21:30:00Z"},
+  {"id": "sync-004", "source": "Google Sheets", "status": "success", "records_synced": 3, "message": "Monthly summary tab synced", "ran_at": "2026-07-11T22:00:00Z"}
+]

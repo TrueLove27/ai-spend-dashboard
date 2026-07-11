@@ -1,0 +1,7 @@
+[
+  {"agent_id": "AG-001", "agent_name": "Sales Voice Alpha", "platform": "ElevenLabs", "calls": 1240, "total_cost_inr": 48200, "avg_duration_sec": 285, "booking_rate": 0.68},
+  {"agent_id": "AG-002", "agent_name": "Support Voice Beta", "platform": "ElevenLabs", "calls": 890, "total_cost_inr": 31500, "avg_duration_sec": 142, "booking_rate": 0.12},
+  {"agent_id": "AG-003", "agent_name": "Bazaar Agent One", "platform": "Agent Bazaar", "calls": 720, "total_cost_inr": 52800, "avg_duration_sec": 310, "booking_rate": 0.74},
+  {"agent_id": "AG-004", "agent_name": "Interview Screener", "platform": "Custom LLM", "calls": 340, "total_cost_inr": 18900, "avg_duration_sec": 520, "booking_rate": 0.41},
+  {"agent_id": "AG-005", "agent_name": "Lead Qualifier", "platform": "Agent Bazaar", "calls": 560, "total_cost_inr": 39600, "avg_duration_sec": 198, "booking_rate": 0.55}
+]
