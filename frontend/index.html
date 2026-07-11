@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Spend Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>AI Spend Dashboard</h1>
+    <p>Track voice &amp; LLM infrastructure costs across providers</p>
+  </header>
+
+  <section class="cards" id="summary-cards"></section>
+
+  <div class="charts">
+    <div class="panel">
+      <h2>Daily Spend by Platform</h2>
+      <canvas id="dailyChart"></canvas>
+    </div>
+    <div class="panel">
+      <h2>Cost Categories</h2>
+      <canvas id="categoryChart"></canvas>
+    </div>
+  </div>
+
+  <div class="panel table-panel">
+    <h2>Daily Breakdown</h2>
+    <table id="daily-table">
+      <thead>
+        <tr>
+          <th>Date</th><th>OpenAI</th><th>Anthropic</th><th>ElevenLabs</th>
+          <th>Deepgram</th><th>Calls</th><th>Total</th><th>CPC</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <footer>Portfolio demo — synthetic data only. Built with FastAPI + vanilla JS.</footer>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "currency": "USD",
+  "platforms": ["OpenAI", "Anthropic", "ElevenLabs", "Deepgram"],
+  "daily_costs": [
+    {"date": "2026-07-01", "openai": 42.5, "anthropic": 18.2, "elevenlabs": 31.0, "deepgram": 12.4, "calls": 890},
+    {"date": "2026-07-02", "openai": 38.1, "anthropic": 22.7, "elevenlabs": 28.5, "deepgram": 11.9, "calls": 812},
+    {"date": "2026-07-03", "openai": 51.3, "anthropic": 19.8, "elevenlabs": 35.2, "deepgram": 14.1, "calls": 945},
+    {"date": "2026-07-04", "openai": 45.0, "anthropic": 24.1, "elevenlabs": 29.8, "deepgram": 13.0, "calls": 878},
+    {"date": "2026-07-05", "openai": 33.6, "anthropic": 15.4, "elevenlabs": 22.1, "deepgram": 9.8, "calls": 701},
+    {"date": "2026-07-06", "openai": 29.2, "anthropic": 12.9, "elevenlabs": 19.5, "deepgram": 8.5, "calls": 620},
+    {"date": "2026-07-07", "openai": 47.8, "anthropic": 21.3, "elevenlabs": 33.4, "deepgram": 12.7, "calls": 902},
+    {"date": "2026-07-08", "openai": 52.1, "anthropic": 26.0, "elevenlabs": 36.9, "deepgram": 15.2, "calls": 980},
+    {"date": "2026-07-09", "openai": 44.4, "anthropic": 20.5, "elevenlabs": 30.1, "deepgram": 12.0, "calls": 855},
+    {"date": "2026-07-10", "openai": 49.6, "anthropic": 23.8, "elevenlabs": 34.0, "deepgram": 13.8, "calls": 920},
+    {"date": "2026-07-11", "openai": 41.2, "anthropic": 17.6, "elevenlabs": 27.3, "deepgram": 11.1, "calls": 840}
+  ],
+  "categories": [
+    {"name": "LLM Inference", "amount": 312.4, "pct": 38},
+    {"name": "Text-to-Speech", "amount": 198.7, "pct": 24},
+    {"name": "Speech-to-Text", "amount": 124.5, "pct": 15},
+    {"name": "Telephony", "amount": 98.2, "pct": 12},
+    {"name": "Analysis & Evals", "amount": 89.1, "pct": 11}
+  ]
+}
