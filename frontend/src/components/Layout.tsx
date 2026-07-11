@@ -1,29 +1,44 @@
-import { NavLink } from "react-router-dom";
-import { ReactNode } from "react";
+import { NavLink, Outlet } from "react-router-dom";
 
-const links = [
-  { to: "/", label: "Overview" },
+const navItems = [
+  { to: "/", label: "Overview", end: true },
   { to: "/daily", label: "Daily Costs" },
   { to: "/agents", label: "Agents" },
   { to: "/analytics", label: "Analytics" },
-  { to: "/sync", label: "Sync Logs" },
+  { to: "/sync", label: "Sync Pipeline" },
 ];
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function Layout() {
   return (
-    <div className="layout">
+    <div className="app-shell">
       <aside className="sidebar">
-        <h1>AI Spend</h1>
-        <p>Voice &amp; LLM Cost Control</p>
-        <nav className="nav">
-          {links.map((l) => (
-            <NavLink key={l.to} to={l.to} end={l.to === "/"}>
-              {l.label}
+        <div className="brand">
+          <div className="brand-mark">SC</div>
+          <div>
+            <h1>Spend Control</h1>
+            <p>AI Voice &amp; LLM Costs</p>
+          </div>
+        </div>
+        <nav>
+          {navItems.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              end={item.end}
+              className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}
+            >
+              {item.label}
             </NavLink>
           ))}
         </nav>
+        <footer className="sidebar-footer">
+          <span className="status-dot" />
+          Live demo · synthetic billing data
+        </footer>
       </aside>
-      <main className="main">{children}</main>
+      <main className="content">
+        <Outlet />
+      </main>
     </div>
   );
 }

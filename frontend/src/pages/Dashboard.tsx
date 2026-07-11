@@ -6,7 +6,7 @@ import {
 import { api } from "../api/client";
 import type { CategoryBreakdown, DailyCostRow, SummaryMetrics } from "../types";
 
-const COLORS = ["#3b82f6", "#8b5cf6", "#10b981", "#f59e0b", "#ef4444"];
+const COLORS = ["#10b981", "#3b82f6", "#8b5cf6", "#f59e0b", "#64748b"];
 
 export default function Dashboard() {
   const [summary, setSummary] = useState<SummaryMetrics | null>(null);
@@ -20,8 +20,8 @@ export default function Dashboard() {
       .catch((e) => setError(String(e)));
   }, []);
 
-  if (error) return <p className="error">{error}</p>;
-  if (!summary) return <p>Loading…</p>;
+  if (error) return <div className="page-state error">Could not load dashboard — is the API running on port 8000?</div>;
+  if (!summary) return <div className="page-state">Loading spend data…</div>;
 
   const chartData = daily.map((r) => ({
     date: r.date.slice(5),
@@ -32,45 +32,74 @@ export default function Dashboard() {
   }));
 
   return (
-    <>
-      <h1 className="page-title">Cost Overview</h1>
-      <p className="page-sub">Multi-provider AI voice &amp; LLM spend — INR display · synthetic demo data</p>
+    <div className="page">
+      <header className="page-header">
+        <div>
+          <h2>Cost overview</h2>
+          <p>Multi-provider AI infrastructure spend with INR reporting and connected-call efficiency metrics.</p>
+        </div>
+        <div className="header-actions">
+          <a className="btn secondary" href="/api/v1/export/daily.csv">Export CSV</a>
+        </div>
+      </header>
 
-      <div className="kpi-grid">
-        <div className="kpi"><div className="label">Total Spend (INR)</div><div className="value">₹{summary.total_spend_inr.toLocaleString()}</div><div className="sub">${summary.total_spend_usd.toLocaleString()} USD</div></div>
-        <div className="kpi"><div className="label">Connected Calls</div><div className="value">{summary.connected_calls.toLocaleString()}</div><div className="sub">{summary.total_calls.toLocaleString()} total</div></div>
-        <div className="kpi"><div className="label">Cost / Connected</div><div className="value">₹{summary.avg_cost_per_connected_inr}</div></div>
-        <div className="kpi"><div className="label">FX Rate</div><div className="value">{summary.usd_to_inr_rate}</div><div className="sub">USD → INR</div></div>
+      <div className="metric-grid">
+        <div className="metric-card">
+          <div className="metric-label">Total spend</div>
+          <div className="metric-value">₹{summary.total_spend_inr.toLocaleString()}</div>
+          <div className="metric-hint">${summary.total_spend_usd.toLocaleString()} USD · {summary.days_tracked} days</div>
+        </div>
+        <div className="metric-card">
+          <div className="metric-label">Connected calls</div>
+          <div className="metric-value">{summary.connected_calls.toLocaleString()}</div>
+          <div className="metric-hint">{summary.total_calls.toLocaleString()} total attempts</div>
+        </div>
+        <div className="metric-card">
+          <div className="metric-label">Cost per connected</div>
+          <div className="metric-value accent">₹{summary.avg_cost_per_connected_inr}</div>
+          <div className="metric-hint">Target benchmark: ₹4.20</div>
+        </div>
+        <div className="metric-card">
+          <div className="metric-label">FX rate</div>
+          <div className="metric-value">{summary.usd_to_inr_rate}</div>
+          <div className="metric-hint">USD → INR conversion</div>
+        </div>
       </div>
 
-      <div className="grid-2">
+      <div className="chart-grid">
         <div className="panel">
-          <h2>Daily Spend by Provider (USD)</h2>
-          <ResponsiveContainer width="100%" height={280}>
+          <div className="panel-heading">
+            <h3>Daily spend by provider</h3>
+            <span>USD · stacked</span>
+          </div>
+          <ResponsiveContainer width="100%" height={300}>
             <BarChart data={chartData}>
-              <XAxis dataKey="date" stroke="#8fa3bf" fontSize={11} />
-              <YAxis stroke="#8fa3bf" fontSize={11} />
-              <Tooltip contentStyle={{ background: "#151d2e", border: "1px solid #2a3654" }} />
-              <Legend />
-              <Bar dataKey="OpenAI" stackId="a" fill="#10b981" />
+              <XAxis dataKey="date" stroke="#64748b" fontSize={11} tickLine={false} />
+              <YAxis stroke="#64748b" fontSize={11} tickLine={false} axisLine={false} />
+              <Tooltip contentStyle={{ background: "#0f172a", border: "1px solid #334155", borderRadius: 8 }} />
+              <Legend wrapperStyle={{ fontSize: 12 }} />
+              <Bar dataKey="OpenAI" stackId="a" fill="#10b981" radius={[0, 0, 0, 0]} />
               <Bar dataKey="Anthropic" stackId="a" fill="#f59e0b" />
               <Bar dataKey="ElevenLabs" stackId="a" fill="#8b5cf6" />
-              <Bar dataKey="Deepgram" stackId="a" fill="#3b82f6" />
+              <Bar dataKey="Deepgram" stackId="a" fill="#3b82f6" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
         <div className="panel">
-          <h2>Spend by Category (INR)</h2>
-          <ResponsiveContainer width="100%" height={280}>
+          <div className="panel-heading">
+            <h3>Category split</h3>
+            <span>INR</span>
+          </div>
+          <ResponsiveContainer width="100%" height={300}>
             <PieChart>
-              <Pie data={categories} dataKey="amount_inr" nameKey="name" cx="50%" cy="50%" outerRadius={90} label>
+              <Pie data={categories} dataKey="amount_inr" nameKey="name" cx="50%" cy="50%" innerRadius={55} outerRadius={90} paddingAngle={2}>
                 {categories.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
               </Pie>
-              <Tooltip contentStyle={{ background: "#151d2e", border: "1px solid #2a3654" }} />
+              <Tooltip contentStyle={{ background: "#0f172a", border: "1px solid #334155", borderRadius: 8 }} formatter={(v: number) => `₹${v.toLocaleString()}`} />
             </PieChart>
           </ResponsiveContainer>
         </div>
       </div>
-    </>
+    </div>
   );
 }

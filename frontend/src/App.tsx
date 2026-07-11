@@ -8,14 +8,14 @@ import SyncLogs from "./pages/SyncLogs";
 
 export default function App() {
   return (
-    <Layout>
-      <Routes>
+    <Routes>
+      <Route element={<Layout />}>
         <Route path="/" element={<Dashboard />} />
         <Route path="/daily" element={<DailyCosts />} />
         <Route path="/agents" element={<Agents />} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/sync" element={<SyncLogs />} />
-      </Routes>
-    </Layout>
+      </Route>
+    </Routes>
   );
 }

@@ -18,16 +18,20 @@ export default function SyncLogs() {
   };
 
   return (
-    <>
-      <h1 className="page-title">Data Sync Pipeline</h1>
-      <p className="page-sub">Scheduled and manual ingestion jobs from billing sources</p>
-      <button className="btn" onClick={trigger} disabled={syncing} style={{ marginBottom: "1rem" }}>
-        {syncing ? "Syncing…" : "Trigger Manual Sync"}
-      </button>
-      <div className="panel">
+    <div className="page">
+      <header className="page-header">
+        <div>
+          <h2>Sync pipeline</h2>
+          <p>Billing ingestion jobs from BigQuery, provider APIs, and call-store connectors.</p>
+        </div>
+        <button className="btn" onClick={trigger} disabled={syncing}>
+          {syncing ? "Running sync…" : "Run manual sync"}
+        </button>
+      </header>
+      <div className="panel table-wrap">
         <table>
           <thead>
-            <tr><th>Time</th><th>Source</th><th>Status</th><th>Records</th><th>Message</th></tr>
+            <tr><th>Timestamp</th><th>Source</th><th>Status</th><th className="num">Records</th><th>Message</th></tr>
           </thead>
           <tbody>
             {logs.map((l) => (
@@ -35,13 +39,13 @@ export default function SyncLogs() {
                 <td>{new Date(l.ran_at).toLocaleString()}</td>
                 <td>{l.source}</td>
                 <td><span className="badge">{l.status}</span></td>
-                <td>{l.records_synced}</td>
+                <td className="num">{l.records_synced}</td>
                 <td>{l.message}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 }

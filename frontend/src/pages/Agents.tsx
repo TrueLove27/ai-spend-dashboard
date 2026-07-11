@@ -10,31 +10,42 @@ export default function Agents() {
   }, []);
 
   return (
-    <>
-      <h1 className="page-title">Agent Cost Analysis</h1>
-      <p className="page-sub">Per-agent spend, call volume, duration, and booking conversion</p>
-      <div className="panel">
+    <div className="page">
+      <header className="page-header">
+        <div>
+          <h2>Agent economics</h2>
+          <p>Voice agent spend, handle time, and booking conversion by platform.</p>
+        </div>
+      </header>
+      <div className="panel table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Agent</th><th>Platform</th><th>Calls</th>
-              <th>Cost (INR)</th><th>Avg Duration</th><th>Booking Rate</th>
+              <th>Agent</th>
+              <th>Platform</th>
+              <th className="num">Calls</th>
+              <th className="num">Spend (INR)</th>
+              <th className="num">Avg duration</th>
+              <th className="num">Booking rate</th>
             </tr>
           </thead>
           <tbody>
             {agents.map((a) => (
               <tr key={a.agent_id}>
-                <td>{a.agent_name}<br /><small style={{ color: "#8fa3bf" }}>{a.agent_id}</small></td>
+                <td>
+                  <strong>{a.agent_name}</strong>
+                  <div style={{ color: "#64748b", fontSize: "0.78rem" }}>{a.agent_id}</div>
+                </td>
                 <td>{a.platform}</td>
-                <td>{a.calls}</td>
-                <td>₹{a.total_cost_inr.toLocaleString()}</td>
-                <td>{a.avg_duration_sec}s</td>
-                <td>{(a.booking_rate * 100).toFixed(0)}%</td>
+                <td className="num">{a.calls.toLocaleString()}</td>
+                <td className="num">₹{a.total_cost_inr.toLocaleString()}</td>
+                <td className="num">{a.avg_duration_sec}s</td>
+                <td className="num">{(a.booking_rate * 100).toFixed(0)}%</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-    </>
+    </div>
   );
 }

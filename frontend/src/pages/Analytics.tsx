@@ -13,33 +13,41 @@ export default function Analytics() {
   }, []);
 
   return (
-    <>
-      <h1 className="page-title">Advanced Analytics</h1>
-      <p className="page-sub">Platform share analysis and weekly spend rollups</p>
-      <div className="grid-2">
+    <div className="page">
+      <header className="page-header">
+        <div>
+          <h2>Advanced analytics</h2>
+          <p>Provider share analysis and weekly spend rollups for finance review.</p>
+        </div>
+      </header>
+      <div className="chart-grid">
         <div className="panel">
-          <h2>Platform Share (USD)</h2>
-          <ResponsiveContainer width="100%" height={260}>
-            <BarChart data={platforms} layout="vertical">
-              <XAxis type="number" stroke="#8fa3bf" fontSize={11} />
-              <YAxis type="category" dataKey="platform" stroke="#8fa3bf" fontSize={11} width={90} />
-              <Tooltip contentStyle={{ background: "#151d2e", border: "1px solid #2a3654" }} />
-              <Bar dataKey="amount_usd" fill="#3b82f6" />
+          <div className="panel-heading"><h3>Platform share</h3><span>USD total</span></div>
+          <ResponsiveContainer width="100%" height={280}>
+            <BarChart data={platforms} layout="vertical" margin={{ left: 20 }}>
+              <XAxis type="number" stroke="#64748b" fontSize={11} />
+              <YAxis type="category" dataKey="platform" stroke="#64748b" fontSize={11} width={88} />
+              <Tooltip contentStyle={{ background: "#0f172a", border: "1px solid #334155", borderRadius: 8 }} />
+              <Bar dataKey="amount_usd" fill="#10b981" radius={[0, 4, 4, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
-        <div className="panel">
-          <h2>Weekly Rollup</h2>
+        <div className="panel table-wrap">
+          <div className="panel-heading"><h3>Weekly rollup</h3></div>
           <table>
-            <thead><tr><th>Week</th><th>Spend INR</th><th>Calls</th></tr></thead>
+            <thead><tr><th>Week</th><th className="num">Spend INR</th><th className="num">Calls</th></tr></thead>
             <tbody>
               {weekly.map((w) => (
-                <tr key={w.week}><td>{w.week}</td><td>₹{Math.round(w.spend_inr).toLocaleString()}</td><td>{w.calls}</td></tr>
+                <tr key={w.week}>
+                  <td>{w.week}</td>
+                  <td className="num">₹{Math.round(w.spend_inr).toLocaleString()}</td>
+                  <td className="num">{w.calls}</td>
+                </tr>
               ))}
             </tbody>
           </table>
         </div>
       </div>
-    </>
+    </div>
   );
 }
